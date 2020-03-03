@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">40397559</string>
-    <color name="blue">#0003b5</color>
+    <string name="group1">Group1</string>
+    <string name="group2">Group2</string>
+
+    <string-array name="group1">
+        <item>item1</item>
+    </string-array>
+
+    <string-array name="group2">
+        <item>item2</item>
+    </string-array>
+
 </resources>
