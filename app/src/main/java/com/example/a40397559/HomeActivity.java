@@ -24,7 +24,7 @@ public class HomeActivity extends AppCompatActivity {
     PieChart pieChart;
     float x1, x2, y1, y2;
     private float[] yData = {23.3f, 23f, 26.4f};
-    private String[] xData = {"Eating out", "Expenses", "Holidays"};
+    private String[] xData = {"Eating Out", "Expenses", "Holidays"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +52,9 @@ public class HomeActivity extends AppCompatActivity {
         pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
+
                 int pos1 = e.toString().indexOf("(sum): ");
-                final String remaining = e.toString().substring(pos1 + 7);
+                final String remaining = e.toString().substring(pos1 + 18);
 
                 for (int i = 0; i < yData.length; i++) {
                     if (yData[i] == Float.parseFloat(remaining)) {
@@ -61,14 +62,9 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     }
                 }
-                final String category = xData[pos1 + 1];
+                final String category = xData[pos1];
 
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        Toast.makeText(HomeActivity.this, "Category " + category + "\n Remaining: £" + remaining, Toast.LENGTH_SHORT).show();
-                    }
-                });
-
+                Toast.makeText(HomeActivity.this, "Category: " + category + "\nRemaining: " + remaining, Toast.LENGTH_SHORT).show();
             }
 
             @Override

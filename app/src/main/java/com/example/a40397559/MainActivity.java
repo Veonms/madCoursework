@@ -7,7 +7,7 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private static int splashTimeout = 4000;
+    private static int splashTimeout = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

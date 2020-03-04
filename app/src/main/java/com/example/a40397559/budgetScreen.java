@@ -32,6 +32,24 @@ public class budgetScreen extends AppCompatActivity {
         initListData();
     }
 
+    public boolean onTouchEvent(MotionEvent touchEvent) {
+        switch (touchEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                x1 = touchEvent.getX();
+                y1 = touchEvent.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = touchEvent.getX();
+                y2 = touchEvent.getY();
+                if (x1 < x2) {
+                    Intent i = new Intent(budgetScreen.this, HomeActivity.class);
+                    startActivity(i);
+                }
+                break;
+        }
+        return false;
+    }
+
     private void initListData() {
         listGroup.add(getString(R.string.group1));
         listGroup.add(getString(R.string.group2));
@@ -53,23 +71,5 @@ public class budgetScreen extends AppCompatActivity {
         listItem.put(listGroup.get(0), list);
         listItem.put(listGroup.get(1), list2);
         adapter.notifyDataSetChanged();
-    }
-
-    public boolean onTouchEvent(MotionEvent touchEvent) {
-        switch (touchEvent.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                x1 = touchEvent.getX();
-                y1 = touchEvent.getY();
-                break;
-            case MotionEvent.ACTION_UP:
-                x2 = touchEvent.getX();
-                y2 = touchEvent.getY();
-                if (x1 < x2) {
-                    Intent i = new Intent(budgetScreen.this, HomeActivity.class);
-                    startActivity(i);
-                }
-                break;
-        }
-        return false;
     }
 }

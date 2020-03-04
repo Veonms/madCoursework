@@ -8,6 +8,6 @@
     <ExpandableListView
         android:id="@+id/expandableList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ExpandableListView>
+        android:layout_height="366dp"></ExpandableListView>
 
 </RelativeLayout>
