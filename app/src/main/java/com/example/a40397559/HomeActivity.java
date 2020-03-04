@@ -3,6 +3,7 @@ package com.example.a40397559;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -111,5 +112,10 @@ public class HomeActivity extends AppCompatActivity {
                 break;
         }
         return false;
+    }
+
+    public void sendMessage(View view) {
+        Intent intent = new Intent(HomeActivity.this, editScreen.class);
+        startActivity(intent);
     }
 }
