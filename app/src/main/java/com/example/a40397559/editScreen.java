@@ -38,7 +38,6 @@ public class editScreen extends AppCompatActivity {
     }
 
     reset.setOnClickListener(new
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
