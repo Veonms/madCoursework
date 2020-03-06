@@ -24,8 +24,8 @@ public class HomeActivity extends AppCompatActivity {
 
     PieChart pieChart;
     float x1, x2, y1, y2;
-    private float[] yData = {23.3f, 23f, 26.4f};
-    private String[] xData = {"Eating Out", "Expenses", "Holidays"};
+    private float[] yData = {23.3f, 23f, 26.4f, 45f, 23};
+    private String[] xData = {"Eating Out", "Entertainment", "Expenses", "Groceries", "Shopping"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
