@@ -20,6 +20,15 @@ public class editScreen extends AppCompatActivity {
         setContentView(R.layout.activity_edit_screen);
 
         Button Clear = findViewById(R.id.btn_reset);
+        Button Update = findViewById(R.id.btn_update);
+
+        Update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
 
         Clear.setOnClickListener(new View.OnClickListener() {
 
