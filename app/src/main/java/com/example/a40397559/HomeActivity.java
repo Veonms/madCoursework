@@ -19,18 +19,33 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
     PieChart pieChart;
     float x1, x2, y1, y2;
-    private float[] yData = {23.3f, 23f, 26.4f, 45f, 23};
+    List<Integer> yData = new ArrayList<>();
     private String[] xData = {"Eating Out", "Entertainment", "Expenses", "Groceries", "Shopping"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        Intent intent = getIntent();
+
+        int rEatOut = intent.getIntExtra(editScreen.EXTRA_NUMBER_EatOut, 0);
+        int rEntertainment = intent.getIntExtra(editScreen.EXTRA_NUMBER_Entertainment, 0);
+        int rExpenses = intent.getIntExtra(editScreen.EXTRA_NUMBER_Expenses, 0);
+        int rGroceries = intent.getIntExtra(editScreen.EXTRA_NUMBER_Groceries, 0);
+        int rShopping = intent.getIntExtra(editScreen.EXTRA_NUMBER_Shopping, 0);
+
+        yData.add(rEatOut);
+        yData.add(rEntertainment);
+        yData.add(rExpenses);
+        yData.add(rGroceries);
+        yData.add(rShopping);
 
         pieChart = (PieChart) findViewById(R.id.idPiechart);
 
@@ -57,8 +72,8 @@ public class HomeActivity extends AppCompatActivity {
                 int pos1 = e.toString().indexOf("(sum): ");
                 final String remaining = e.toString().substring(pos1 + 18);
 
-                for (int i = 0; i < yData.length; i++) {
-                    if (yData[i] == Float.parseFloat(remaining)) {
+                for (int i = 0; i < yData.size(); i++) {
+                    if (yData.get(i) == Float.parseFloat(remaining)) {
                         pos1 = i;
                         break;
                     }
@@ -79,8 +94,8 @@ public class HomeActivity extends AppCompatActivity {
         ArrayList<PieEntry> yEntries = new ArrayList<>();
         ArrayList<String> xEntries = new ArrayList<>();
 
-        for (int i = 0; i < yData.length; i++) {
-            yEntries.add(new PieEntry(yData[i], i));
+        for (int i = 0; i < yData.size(); i++) {
+            yEntries.add(new PieEntry(yData.get(i), i));
         }
 
         for (int i = 0; i < xData.length; i++) {

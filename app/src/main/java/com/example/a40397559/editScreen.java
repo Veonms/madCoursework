@@ -13,6 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 public class editScreen extends AppCompatActivity {
 
     float x1, x2, y1, y2;
+    public static final String EXTRA_NUMBER_EatOut = "com.example.a40397559.EXTRA_NUMBER_EatOut";
+    public static final String EXTRA_NUMBER_Entertainment = "com.example.a40397559.EXTRA_NUMBER_Entertainment";
+    public static final String EXTRA_NUMBER_Expenses = "com.example.a40397559.EXTRA_NUMBER_Expenses";
+    public static final String EXTRA_NUMBER_Groceries = "com.example.a40397559.EXTRA_NUMBER_Groceries";
+    public static final String EXTRA_NUMBER_Shopping = "com.example.a40397559.EXTRA_NUMBER_Shopping";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +30,7 @@ public class editScreen extends AppCompatActivity {
         Update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                dataToChart();
             }
         });
 
@@ -68,6 +72,30 @@ public class editScreen extends AppCompatActivity {
                 break;
         }
         return false;
+    }
+
+    public void dataToChart() {
+        Intent intent = new Intent(this, HomeActivity.class);
+
+        EditText dEatOut = (EditText) findViewById(R.id.txt_budgetEatingOut);
+        EditText dEntertainment = (EditText) findViewById(R.id.txt_budgetEntertainment);
+        EditText dExpenses = (EditText) findViewById(R.id.txt_budgetExpenses);
+        EditText dGroceries = (EditText) findViewById(R.id.txt_budgetGroceries);
+        EditText dShopping = (EditText) findViewById(R.id.txt_budgetShopping);
+
+        int rEatOut = Integer.parseInt(dEatOut.getText().toString());
+        int rEntertainment = Integer.parseInt(dEntertainment.getText().toString());
+        int rExpenses = Integer.parseInt(dExpenses.getText().toString());
+        int rGroceries = Integer.parseInt(dGroceries.getText().toString());
+        int rShopping = Integer.parseInt(dShopping.getText().toString());
+
+        intent.putExtra(EXTRA_NUMBER_EatOut, rEatOut);
+        intent.putExtra(EXTRA_NUMBER_Entertainment, rEntertainment);
+        intent.putExtra(EXTRA_NUMBER_Expenses, rExpenses);
+        intent.putExtra(EXTRA_NUMBER_Groceries, rGroceries);
+        intent.putExtra(EXTRA_NUMBER_Shopping, rShopping);
+
+        startActivity(intent);
     }
 }
 
