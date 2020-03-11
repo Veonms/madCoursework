@@ -1,6 +1,7 @@
 package com.example.a40397559;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,6 +24,19 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
+    public static final String EXTRA_NUMBER_EatOut = "com.example.a40397559.EXTRA_NUMBER_EatOut";
+    public static final String EXTRA_NUMBER_Entertainment = "com.example.a40397559.EXTRA_NUMBER_Entertainment";
+    public static final String EXTRA_NUMBER_Expenses = "com.example.a40397559.EXTRA_NUMBER_Expenses";
+    public static final String EXTRA_NUMBER_Groceries = "com.example.a40397559.EXTRA_NUMBER_Groceries";
+    public static final String EXTRA_NUMBER_Shopping = "com.example.a40397559.EXTRA_NUMBER_Shopping";
+    public static final String SHARED_PREFS = "com.example.a40397559.SHAREDPREFS";
+
+    private int rEatOut;
+    private int rEntertainment;
+    private int rExpenses;
+    private int rGroceries;
+    private int rShopping;
+
     PieChart pieChart;
     float x1, x2, y1, y2;
     List<Integer> yData = new ArrayList<>();
@@ -34,19 +48,23 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         Intent intent = getIntent();
+        try {
+            rEatOut = intent.getIntExtra(editScreen.EXTRA_NUMBER_EatOut, 0);
+            rEntertainment = intent.getIntExtra(editScreen.EXTRA_NUMBER_Entertainment, 0);
+            rExpenses = intent.getIntExtra(editScreen.EXTRA_NUMBER_Expenses, 0);
+            rGroceries = intent.getIntExtra(editScreen.EXTRA_NUMBER_Groceries, 0);
+            rShopping = intent.getIntExtra(editScreen.EXTRA_NUMBER_Shopping, 0);
 
-        int rEatOut = intent.getIntExtra(editScreen.EXTRA_NUMBER_EatOut, 0);
-        int rEntertainment = intent.getIntExtra(editScreen.EXTRA_NUMBER_Entertainment, 0);
-        int rExpenses = intent.getIntExtra(editScreen.EXTRA_NUMBER_Expenses, 0);
-        int rGroceries = intent.getIntExtra(editScreen.EXTRA_NUMBER_Groceries, 0);
-        int rShopping = intent.getIntExtra(editScreen.EXTRA_NUMBER_Shopping, 0);
+            if (rEatOut == 0 && rEntertainment == 0 && rExpenses == 0
+                    && rGroceries == 0 && rShopping == 0) {
+                throw new Exception();
+            }
+            update();
 
-        yData.add(rEatOut);
-        yData.add(rEntertainment);
-        yData.add(rExpenses);
-        yData.add(rGroceries);
-        yData.add(rShopping);
-
+        } catch (Exception e) {
+            loadData();
+            update();
+        }
         pieChart = (PieChart) findViewById(R.id.idPiechart);
 
         pieChart.setHoleRadius(60f);
@@ -88,6 +106,7 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+        saveData();
     }
 
     private void addData() {
@@ -132,5 +151,35 @@ public class HomeActivity extends AppCompatActivity {
     public void sendMessage(View view) {
         Intent intent = new Intent(HomeActivity.this, editScreen.class);
         startActivity(intent);
+    }
+
+    public void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putInt(EXTRA_NUMBER_EatOut, rEatOut);
+        editor.putInt(EXTRA_NUMBER_Entertainment, rEntertainment);
+        editor.putInt(EXTRA_NUMBER_Expenses, rExpenses);
+        editor.putInt(EXTRA_NUMBER_Groceries, rGroceries);
+        editor.putInt(EXTRA_NUMBER_Shopping, rShopping);
+
+        editor.apply();
+    }
+
+    public void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        rEatOut = sharedPreferences.getInt(EXTRA_NUMBER_EatOut, 0);
+        rEntertainment = sharedPreferences.getInt(EXTRA_NUMBER_Entertainment, 0);
+        rExpenses = sharedPreferences.getInt(EXTRA_NUMBER_Expenses, 0);
+        rGroceries = sharedPreferences.getInt(EXTRA_NUMBER_Groceries, 0);
+        rShopping = sharedPreferences.getInt(EXTRA_NUMBER_Shopping, 0);
+    }
+
+    public void update() {
+        yData.add(rEatOut);
+        yData.add(rEntertainment);
+        yData.add(rExpenses);
+        yData.add(rGroceries);
+        yData.add(rShopping);
     }
 }
