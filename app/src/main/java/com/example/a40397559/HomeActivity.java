@@ -55,7 +55,6 @@ public class HomeActivity extends AppCompatActivity {
             rGroceries = intent.getIntExtra(editScreen.EXTRA_NUMBER_SAVE_Groceries, 0);
             rShopping = intent.getIntExtra(editScreen.EXTRA_NUMBER_SAVE_Shopping, 0);
 
-
             if (rEatOut == 0 && rEntertainment == 0 && rExpenses == 0
                     && rGroceries == 0 && rShopping == 0) {
                 throw new Exception();
@@ -64,6 +63,7 @@ public class HomeActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             loadData();
+            update();
         }
         pieChart = (PieChart) findViewById(R.id.idPiechart);
 
