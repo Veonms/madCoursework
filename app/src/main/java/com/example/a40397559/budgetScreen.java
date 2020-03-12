@@ -51,25 +51,49 @@ public class budgetScreen extends AppCompatActivity {
     }
 
     private void initListData() {
-        listGroup.add(getString(R.string.group1));
-        listGroup.add(getString(R.string.group2));
+        listGroup.add(getString(R.string.EatingOut));
+        listGroup.add(getString(R.string.Entertainment));
+        listGroup.add(getString(R.string.Expenses));
+        listGroup.add(getString(R.string.Groceries));
+        listGroup.add(getString(R.string.Shopping));
 
         String[] array;
 
-        List<String> list = new ArrayList<>();
-        array = getResources().getStringArray(R.array.group1);
+        List<String> eatingOutList = new ArrayList<>();
+        array = getResources().getStringArray(R.array.EatingOut);
         for (String item : array) {
-            list.add(item);
+            eatingOutList.add(item);
         }
 
-        List<String> list2 = new ArrayList<>();
-        array = getResources().getStringArray(R.array.group2);
+        List<String> entertainmentList = new ArrayList<>();
+        array = getResources().getStringArray(R.array.Entertainment);
         for (String item : array) {
-            list2.add(item);
+            entertainmentList.add(item);
         }
 
-        listItem.put(listGroup.get(0), list);
-        listItem.put(listGroup.get(1), list2);
+        List<String> expensesList = new ArrayList<>();
+        array = getResources().getStringArray(R.array.Expenses);
+        for (String item : array) {
+            expensesList.add(item);
+        }
+
+        List<String> groceriesList = new ArrayList<>();
+        array = getResources().getStringArray(R.array.Groceries);
+        for (String item : array) {
+            groceriesList.add(item);
+        }
+
+        List<String> shoppingList = new ArrayList<>();
+        array = getResources().getStringArray(R.array.Shopping);
+        for (String item : array) {
+            shoppingList.add(item);
+        }
+
+        listItem.put(listGroup.get(0), eatingOutList);
+        listItem.put(listGroup.get(1), entertainmentList);
+        listItem.put(listGroup.get(2), expensesList);
+        listItem.put(listGroup.get(3), groceriesList);
+        listItem.put(listGroup.get(4), shoppingList);
         adapter.notifyDataSetChanged();
     }
 }
