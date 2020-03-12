@@ -17,6 +17,12 @@ public class editScreen extends AppCompatActivity {
 
     public static final String SHARED_PREFS = "com.example.a40397559.SHAREDPREFS";
 
+    public static final String EXTRA_NUMBER_SAVE_EatOut = "com.example.a40397559.EXTRA_NUMBER_SAVE_EatOut";
+    public static final String EXTRA_NUMBER_SAVE_Entertainment = "com.example.a40397559.EXTRA_NUMBER_SAVE_Entertainment";
+    public static final String EXTRA_NUMBER_SAVE_Expenses = "com.example.a40397559.EXTRA_NUMBER_SAVE_Expenses";
+    public static final String EXTRA_NUMBER_SAVE_Groceries = "com.example.a40397559.EXTRA_NUMBER_SAVE_Groceries";
+    public static final String EXTRA_NUMBER_SAVE_Shopping = "com.example.a40397559.EXTRA_NUMBER_SAVE_Shopping";
+
     public static final String EXTRA_NUMBER_EatOut = "com.example.a40397559.EXTRA_NUMBER_EatOut";
     public static final String EXTRA_NUMBER_Entertainment = "com.example.a40397559.EXTRA_NUMBER_Entertainment";
     public static final String EXTRA_NUMBER_Expenses = "com.example.a40397559.EXTRA_NUMBER_Expenses";
@@ -28,12 +34,6 @@ public class editScreen extends AppCompatActivity {
     public static final String EXTRA_NUMBER_Expenses2 = "com.example.a40397559.EXTRA_NUMBER_Expenses2";
     public static final String EXTRA_NUMBER_Groceries2 = "com.example.a40397559.EXTRA_NUMBER_Groceries2";
     public static final String EXTRA_NUMBER_Shopping2 = "com.example.a40397559.EXTRA_NUMBER_Shopping2";
-
-    int rEatOut;
-    int rEntertainment;
-    int rExpenses;
-    int rGroceries;
-    int rShopping;
 
 
     private int saveEatOutB;
@@ -112,25 +112,31 @@ public class editScreen extends AppCompatActivity {
     }
 
     public void dataToChart() {
+
         Intent intent = new Intent(this, HomeActivity.class);
 
-        EditText dEatOut = (EditText) findViewById(R.id.txt_budgetEatingOut);
-        EditText dEntertainment = (EditText) findViewById(R.id.txt_budgetEntertainment);
-        EditText dExpenses = (EditText) findViewById(R.id.txt_budgetExpenses);
-        EditText dGroceries = (EditText) findViewById(R.id.txt_budgetGroceries);
-        EditText dShopping = (EditText) findViewById(R.id.txt_budgetShopping);
+        EditText bEatOut = (EditText) findViewById(R.id.txt_budgetEatingOut);
+        EditText bEntertainment = (EditText) findViewById(R.id.txt_budgetEntertainment);
+        EditText bExpenses = (EditText) findViewById(R.id.txt_budgetExpenses);
+        EditText bGroceries = (EditText) findViewById(R.id.txt_budgetGroceries);
+        EditText bShopping = (EditText) findViewById(R.id.txt_budgetShopping);
+        EditText sEatOut = (EditText) findViewById(R.id.txt_spentEatingOut);
+        EditText sEntertainment = (EditText) findViewById(R.id.txt_spentEntertainment);
+        EditText sExpenses = (EditText) findViewById(R.id.txt_spentExpenses);
+        EditText sGroceries = (EditText) findViewById(R.id.txt_spentGroceries);
+        EditText sShopping = (EditText) findViewById(R.id.txt_spentShopping);
 
-        rEatOut = Integer.parseInt(dEatOut.getText().toString());
-        rEntertainment = Integer.parseInt(dEntertainment.getText().toString());
-        rExpenses = Integer.parseInt(dExpenses.getText().toString());
-        rGroceries = Integer.parseInt(dGroceries.getText().toString());
-        rShopping = Integer.parseInt(dShopping.getText().toString());
+        int rEatOut = Integer.parseInt(bEatOut.getText().toString()) - Integer.parseInt(sEatOut.getText().toString());
+        int rEntertainment = Integer.parseInt(bEntertainment.getText().toString()) - Integer.parseInt(sEntertainment.getText().toString());
+        int rExpenses = Integer.parseInt(bExpenses.getText().toString()) - Integer.parseInt(sExpenses.getText().toString());
+        int rGroceries = Integer.parseInt(bGroceries.getText().toString()) - Integer.parseInt(sGroceries.getText().toString());
+        int rShopping = Integer.parseInt(bShopping.getText().toString()) - Integer.parseInt(sShopping.getText().toString());
 
-        intent.putExtra(EXTRA_NUMBER_EatOut, rEatOut);
-        intent.putExtra(EXTRA_NUMBER_Entertainment, rEntertainment);
-        intent.putExtra(EXTRA_NUMBER_Expenses, rExpenses);
-        intent.putExtra(EXTRA_NUMBER_Groceries, rGroceries);
-        intent.putExtra(EXTRA_NUMBER_Shopping, rShopping);
+        intent.putExtra(EXTRA_NUMBER_SAVE_EatOut, rEatOut);
+        intent.putExtra(EXTRA_NUMBER_SAVE_Entertainment, rEntertainment);
+        intent.putExtra(EXTRA_NUMBER_SAVE_Expenses, rExpenses);
+        intent.putExtra(EXTRA_NUMBER_SAVE_Groceries, rGroceries);
+        intent.putExtra(EXTRA_NUMBER_SAVE_Shopping, rShopping);
 
         startActivity(intent);
     }

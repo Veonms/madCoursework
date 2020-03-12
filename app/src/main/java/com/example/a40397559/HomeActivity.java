@@ -24,11 +24,11 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
-    public static final String EXTRA_NUMBER_EatOut = "com.example.a40397559.EXTRA_NUMBER_EatOut";
-    public static final String EXTRA_NUMBER_Entertainment = "com.example.a40397559.EXTRA_NUMBER_Entertainment";
-    public static final String EXTRA_NUMBER_Expenses = "com.example.a40397559.EXTRA_NUMBER_Expenses";
-    public static final String EXTRA_NUMBER_Groceries = "com.example.a40397559.EXTRA_NUMBER_Groceries";
-    public static final String EXTRA_NUMBER_Shopping = "com.example.a40397559.EXTRA_NUMBER_Shopping";
+    public static final String EXTRA_NUMBER_SAVE_EatOut = "com.example.a40397559.EXTRA_NUMBER_SAVE_EatOut";
+    public static final String EXTRA_NUMBER_SAVE_Entertainment = "com.example.a40397559.EXTRA_NUMBER_SAVE_Entertainment";
+    public static final String EXTRA_NUMBER_SAVE_Expenses = "com.example.a40397559.EXTRA_NUMBER_SAVE_Expenses";
+    public static final String EXTRA_NUMBER_SAVE_Groceries = "com.example.a40397559.EXTRA_NUMBER_SAVE_Groceries";
+    public static final String EXTRA_NUMBER_SAVE_Shopping = "com.example.a40397559.EXTRA_NUMBER_SAVE_Shopping";
     public static final String SHARED_PREFS = "com.example.a40397559.SHAREDPREFS";
 
     private int rEatOut;
@@ -49,11 +49,12 @@ public class HomeActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         try {
-            rEatOut = intent.getIntExtra(editScreen.EXTRA_NUMBER_EatOut, 0);
-            rEntertainment = intent.getIntExtra(editScreen.EXTRA_NUMBER_Entertainment, 0);
-            rExpenses = intent.getIntExtra(editScreen.EXTRA_NUMBER_Expenses, 0);
-            rGroceries = intent.getIntExtra(editScreen.EXTRA_NUMBER_Groceries, 0);
-            rShopping = intent.getIntExtra(editScreen.EXTRA_NUMBER_Shopping, 0);
+            rEatOut = intent.getIntExtra(editScreen.EXTRA_NUMBER_SAVE_EatOut, 0);
+            rEntertainment = intent.getIntExtra(editScreen.EXTRA_NUMBER_SAVE_Entertainment, 0);
+            rExpenses = intent.getIntExtra(editScreen.EXTRA_NUMBER_SAVE_Expenses, 0);
+            rGroceries = intent.getIntExtra(editScreen.EXTRA_NUMBER_SAVE_Groceries, 0);
+            rShopping = intent.getIntExtra(editScreen.EXTRA_NUMBER_SAVE_Shopping, 0);
+
 
             if (rEatOut == 0 && rEntertainment == 0 && rExpenses == 0
                     && rGroceries == 0 && rShopping == 0) {
@@ -63,7 +64,6 @@ public class HomeActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             loadData();
-            update();
         }
         pieChart = (PieChart) findViewById(R.id.idPiechart);
 
@@ -157,22 +157,23 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putInt(EXTRA_NUMBER_EatOut, rEatOut);
-        editor.putInt(EXTRA_NUMBER_Entertainment, rEntertainment);
-        editor.putInt(EXTRA_NUMBER_Expenses, rExpenses);
-        editor.putInt(EXTRA_NUMBER_Groceries, rGroceries);
-        editor.putInt(EXTRA_NUMBER_Shopping, rShopping);
+        editor.putInt(EXTRA_NUMBER_SAVE_EatOut, rEatOut);
+        editor.putInt(EXTRA_NUMBER_SAVE_Entertainment, rEntertainment);
+        editor.putInt(EXTRA_NUMBER_SAVE_Expenses, rExpenses);
+        editor.putInt(EXTRA_NUMBER_SAVE_Groceries, rGroceries);
+        editor.putInt(EXTRA_NUMBER_SAVE_Shopping, rShopping);
 
         editor.apply();
     }
 
     public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        rEatOut = sharedPreferences.getInt(EXTRA_NUMBER_EatOut, 0);
-        rEntertainment = sharedPreferences.getInt(EXTRA_NUMBER_Entertainment, 0);
-        rExpenses = sharedPreferences.getInt(EXTRA_NUMBER_Expenses, 0);
-        rGroceries = sharedPreferences.getInt(EXTRA_NUMBER_Groceries, 0);
-        rShopping = sharedPreferences.getInt(EXTRA_NUMBER_Shopping, 0);
+
+        rEatOut = sharedPreferences.getInt(EXTRA_NUMBER_SAVE_EatOut, 0);
+        rEntertainment = sharedPreferences.getInt(EXTRA_NUMBER_SAVE_Entertainment, 0);
+        rExpenses = sharedPreferences.getInt(EXTRA_NUMBER_SAVE_Expenses, 0);
+        rGroceries = sharedPreferences.getInt(EXTRA_NUMBER_SAVE_Groceries, 0);
+        rShopping = sharedPreferences.getInt(EXTRA_NUMBER_SAVE_Shopping, 0);
     }
 
     public void update() {
