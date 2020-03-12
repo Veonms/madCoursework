@@ -15,22 +15,33 @@ public class editScreen extends AppCompatActivity {
 
     float x1, x2, y1, y2;
 
+    public static final String SHARED_PREFS = "com.example.a40397559.SHAREDPREFS";
+
     public static final String EXTRA_NUMBER_EatOut = "com.example.a40397559.EXTRA_NUMBER_EatOut";
     public static final String EXTRA_NUMBER_Entertainment = "com.example.a40397559.EXTRA_NUMBER_Entertainment";
     public static final String EXTRA_NUMBER_Expenses = "com.example.a40397559.EXTRA_NUMBER_Expenses";
     public static final String EXTRA_NUMBER_Groceries = "com.example.a40397559.EXTRA_NUMBER_Groceries";
     public static final String EXTRA_NUMBER_Shopping = "com.example.a40397559.EXTRA_NUMBER_Shopping";
-    public static final String SHARED_PREFS = "com.example.a40397559.SHAREDPREFS";
+
+    public static final String EXTRA_NUMBER_EatOut2 = "com.example.a40397559.EXTRA_NUMBER_EatOut2";
+    public static final String EXTRA_NUMBER_Entertainment2 = "com.example.a40397559.EXTRA_NUMBER_Entertainment2";
+    public static final String EXTRA_NUMBER_Expenses2 = "com.example.a40397559.EXTRA_NUMBER_Expenses2";
+    public static final String EXTRA_NUMBER_Groceries2 = "com.example.a40397559.EXTRA_NUMBER_Groceries2";
+    public static final String EXTRA_NUMBER_Shopping2 = "com.example.a40397559.EXTRA_NUMBER_Shopping2";
+
     int rEatOut;
     int rEntertainment;
     int rExpenses;
     int rGroceries;
     int rShopping;
+
+
     private int saveEatOutB;
     private int saveEntertainmentB;
     private int saveExpensesB;
     private int saveGroceriesB;
     private int saveShoppingB;
+
     private int saveEatOutS;
     private int saveEntertainmentS;
     private int saveExpensesS;
@@ -51,11 +62,6 @@ public class editScreen extends AppCompatActivity {
 
         Button Clear = findViewById(R.id.btn_reset);
         Button Update = findViewById(R.id.btn_update);
-        EditText eatOutB = (EditText) findViewById(R.id.txt_budgetEatingOut);
-        EditText entertainmentB = (EditText) findViewById(R.id.txt_budgetEntertainment);
-        EditText expensesB = (EditText) findViewById(R.id.txt_budgetExpenses);
-        EditText groceriesB = (EditText) findViewById(R.id.txt_budgetGroceries);
-        EditText shoppingB = (EditText) findViewById(R.id.txt_budgetShopping);
 
         Update.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,22 +139,59 @@ public class editScreen extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putInt(EXTRA_NUMBER_EatOut, rEatOut);
-        editor.putInt(EXTRA_NUMBER_Entertainment, rEntertainment);
-        editor.putInt(EXTRA_NUMBER_Expenses, rExpenses);
-        editor.putInt(EXTRA_NUMBER_Groceries, rGroceries);
-        editor.putInt(EXTRA_NUMBER_Shopping, rShopping);
+        EditText dEatOut = (EditText) findViewById(R.id.txt_budgetEatingOut);
+        EditText dEntertainment = (EditText) findViewById(R.id.txt_budgetEntertainment);
+        EditText dExpenses = (EditText) findViewById(R.id.txt_budgetExpenses);
+        EditText dGroceries = (EditText) findViewById(R.id.txt_budgetGroceries);
+        EditText dShopping = (EditText) findViewById(R.id.txt_budgetShopping);
+
+        EditText dEatOut2 = (EditText) findViewById(R.id.txt_spentEatingOut);
+        EditText dEntertainment2 = (EditText) findViewById(R.id.txt_spentEntertainment);
+        EditText dExpenses2 = (EditText) findViewById(R.id.txt_spentExpenses);
+        EditText dGroceries2 = (EditText) findViewById(R.id.txt_spentGroceries);
+        EditText dShopping2 = (EditText) findViewById(R.id.txt_spentShopping);
+
+        saveEatOutB = Integer.parseInt(dEatOut.getText().toString());
+        saveEntertainmentB = Integer.parseInt(dEntertainment.getText().toString());
+        saveExpensesB = Integer.parseInt(dExpenses.getText().toString());
+        saveGroceriesB = Integer.parseInt(dGroceries.getText().toString());
+        saveShoppingB = Integer.parseInt(dShopping.getText().toString());
+
+        saveEatOutS = Integer.parseInt(dEatOut2.getText().toString());
+        saveEntertainmentS = Integer.parseInt(dEntertainment2.getText().toString());
+        saveExpensesS = Integer.parseInt(dExpenses2.getText().toString());
+        saveGroceriesS = Integer.parseInt(dGroceries2.getText().toString());
+        saveShoppingS = Integer.parseInt(dShopping2.getText().toString());
+
+        editor.putInt(EXTRA_NUMBER_EatOut, saveEatOutB);
+        editor.putInt(EXTRA_NUMBER_Entertainment, saveEntertainmentB);
+        editor.putInt(EXTRA_NUMBER_Expenses, saveExpensesB);
+        editor.putInt(EXTRA_NUMBER_Groceries, saveGroceriesB);
+        editor.putInt(EXTRA_NUMBER_Shopping, saveShoppingB);
+
+        editor.putInt(EXTRA_NUMBER_EatOut2, saveEatOutS);
+        editor.putInt(EXTRA_NUMBER_Entertainment2, saveEntertainmentS);
+        editor.putInt(EXTRA_NUMBER_Expenses2, saveExpensesS);
+        editor.putInt(EXTRA_NUMBER_Groceries2, saveGroceriesS);
+        editor.putInt(EXTRA_NUMBER_Shopping2, saveShoppingS);
 
         editor.apply();
     }
 
     public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+
         saveEatOutB = sharedPreferences.getInt(EXTRA_NUMBER_EatOut, 0);
         saveEntertainmentB = sharedPreferences.getInt(EXTRA_NUMBER_Entertainment, 0);
         saveExpensesB = sharedPreferences.getInt(EXTRA_NUMBER_Expenses, 0);
         saveGroceriesB = sharedPreferences.getInt(EXTRA_NUMBER_Groceries, 0);
         saveShoppingB = sharedPreferences.getInt(EXTRA_NUMBER_Shopping, 0);
+
+        saveEatOutS = sharedPreferences.getInt(EXTRA_NUMBER_EatOut2, 0);
+        saveEntertainmentS = sharedPreferences.getInt(EXTRA_NUMBER_Entertainment2, 0);
+        saveExpensesS = sharedPreferences.getInt(EXTRA_NUMBER_Expenses2, 0);
+        saveGroceriesS = sharedPreferences.getInt(EXTRA_NUMBER_Groceries2, 0);
+        saveShoppingS = sharedPreferences.getInt(EXTRA_NUMBER_Shopping2, 0);
     }
 
     public void update() {
@@ -158,11 +201,23 @@ public class editScreen extends AppCompatActivity {
         EditText groceriesB = (EditText) findViewById(R.id.txt_budgetGroceries);
         EditText shoppingB = (EditText) findViewById(R.id.txt_budgetShopping);
 
+        EditText eatOutS = (EditText) findViewById(R.id.txt_spentEatingOut);
+        EditText entertainmentS = (EditText) findViewById(R.id.txt_spentEntertainment);
+        EditText expensesS = (EditText) findViewById(R.id.txt_spentExpenses);
+        EditText groceriesS = (EditText) findViewById(R.id.txt_spentGroceries);
+        EditText shoppingS = (EditText) findViewById(R.id.txt_spentShopping);
+
         eatOutB.setText(String.valueOf(saveEatOutB));
         entertainmentB.setText(String.valueOf(saveEntertainmentB));
         expensesB.setText(String.valueOf(saveExpensesB));
         groceriesB.setText(String.valueOf(saveGroceriesB));
         shoppingB.setText(String.valueOf(saveShoppingB));
+
+        eatOutS.setText(String.valueOf(saveEatOutS));
+        entertainmentS.setText(String.valueOf(saveEntertainmentS));
+        expensesS.setText(String.valueOf(saveExpensesS));
+        groceriesS.setText(String.valueOf(saveGroceriesS));
+        shoppingS.setText(String.valueOf(saveShoppingS));
     }
 }
 
