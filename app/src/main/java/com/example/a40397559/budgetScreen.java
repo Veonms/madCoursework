@@ -29,11 +29,11 @@ public class budgetScreen extends AppCompatActivity {
     }
 
     private void createItems() {
-        addItem("Eating Out", new String[]{"House", "Boat", "Candy", "Collection", "Sport", "Ball", "Head"}, R.color.blue, R.drawable.ic_icon);
-        addItem("Entertainment", new String[]{"Dog", "Horse", "Boat"}, R.color.blue, R.drawable.ic_icon);
-        addItem("Expenses", new String[]{"Cat"}, R.color.blue, R.drawable.ic_icon);
-        addItem("Groceries", new String[]{"Parrot", "Elephant", "Coffee"}, R.color.blue, R.drawable.ic_icon);
-        addItem("Shopping", new String[]{}, R.color.blue, R.drawable.ic_icon);
+        addItem("Eating Out", new String[]{"House", "Boat", "Candy", "Collection", "Sport", "Ball", "Head"}, R.color.red, R.drawable.ic_icon);
+        addItem("Entertainment", new String[]{"Dog", "Horse", "Boat"}, R.color.red, R.drawable.ic_icon);
+        addItem("Expenses", new String[]{"Cat"}, R.color.red, R.drawable.ic_icon);
+        addItem("Groceries", new String[]{"Parrot", "Elephant", "Coffee"}, R.color.red, R.drawable.ic_icon);
+        addItem("Shopping", new String[]{}, R.color.red, R.drawable.ic_icon);
     }
 
     private void addItem(String title, String[] subItems, int colorRes, int iconRes) {
