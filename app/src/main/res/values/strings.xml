@@ -1,31 +1,4 @@
 <resources>
     <string name="app_name">40397559</string>
-    <string name="EatingOut">Eating Out</string>
-    <string name="Entertainment">Entertainment</string>
-    <string name="Expenses">Expenses</string>
-    <string name="Groceries">Groceries</string>
-    <string name="Shopping">Shopping</string>
-
-    <string-array name="EatingOut">
-        <item>MacDonalds: £10</item>
-    </string-array>
-
-    <string-array name="Entertainment">
-        <item>Cinema: £7</item>
-    </string-array>
-
-    <string-array name="Expenses">
-        <item>Bus Pass: £50</item>
-    </string-array>
-
-    <string-array name="Groceries">
-        <item>Asda: £12</item>
-    </string-array>
-
-
-    <string-array name="Shopping">
-        <item>Next: £17</item>
-        <item>Primark: £ 14</item>
-    </string-array>
-
+    <string name="enter_title">Enter Title</string>
 </resources>
