@@ -13,10 +13,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.diegodobelo.expandingview.ExpandingItem;
 import com.diegodobelo.expandingview.ExpandingList;
-
+/*
+* This activity will allow users to enter their transactions and remove transactions. When a
+* category is clicked it will expand with an animation displaying all items under that category.
+* The user will be able to swipe right to go back to the previous activity (HomeActivity).
+* References:
+*   https://www.youtube.com/watch?v=kKqZoS4THnY
+*   https://github.com/diegodobelo/AndroidExpandingViewLibrary
+ */
 public class budgetScreen extends AppCompatActivity {
 
-    float x1, x2, y1, y2;
+    float x1, x2;
     private ExpandingList mExpandingList;
 
     @Override
@@ -24,38 +31,39 @@ public class budgetScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_budget_screen);
 
-        mExpandingList = findViewById(R.id.expanding_list_main);
+        // Assigns the expanding list to the variable mExpandingList
+        mExpandingList = findViewById(R.id.expanding_list);
         createItems();
     }
 
     private void createItems() {
-        addItem("Eating Out", new String[]{"House", "Boat", "Candy", "Collection", "Sport", "Ball", "Head"}, R.color.red, R.drawable.ic_icon);
-        addItem("Entertainment", new String[]{"Dog", "Horse", "Boat"}, R.color.red, R.drawable.ic_icon);
-        addItem("Expenses", new String[]{"Cat"}, R.color.red, R.drawable.ic_icon);
-        addItem("Groceries", new String[]{"Parrot", "Elephant", "Coffee"}, R.color.red, R.drawable.ic_icon);
-        addItem("Shopping", new String[]{}, R.color.red, R.drawable.ic_icon);
+        // Adds different categories to the expendable list with items under each category
+        addItem("Eating Out", new String[]{"Macdonalds: £8", "Nandos: £14", "Uber Eats: £24"}, R.color.red, R.drawable.ic_icon);
+        addItem("Entertainment", new String[]{"Cinema: £8", "Football: £24"}, R.color.red, R.drawable.ic_icon);
+        addItem("Expenses", new String[]{"Bus pass: £52"}, R.color.red, R.drawable.ic_icon);
+        addItem("Groceries", new String[]{"Lidl: £7", "Morrisons: £3"}, R.color.red, R.drawable.ic_icon);
+        addItem("Shopping", new String[]{"Next: £7", "River Island: £3"}, R.color.red, R.drawable.ic_icon);
     }
 
     private void addItem(String title, String[] subItems, int colorRes, int iconRes) {
-        //Let's create an item with R.layout.expanding_layout
-        final ExpandingItem item = mExpandingList.createNewItem(R.layout.expanding_layout); //ERROR
+        final ExpandingItem item = mExpandingList.createNewItem(R.layout.expanding_layout);
 
-        //If item creation is successful, let's configure it
+        // Checks thee item isnt empty
         if (item != null) {
+            // Assigns colour and image
             item.setIndicatorColorRes(colorRes);
             item.setIndicatorIconRes(iconRes);
-            //It is possible to get any view inside the inflated layout. Let's set the text in the item
+
             ((TextView) item.findViewById(R.id.title)).setText(title);
 
-            //We can create items in batch.
+            // Creates multiple items
             item.createSubItems(subItems.length);
             for (int i = 0; i < item.getSubItemsCount(); i++) {
-                //Let's get the created sub item by its index
                 final View view = item.getSubItemView(i);
-
-                //Let's set some values in
                 configureSubItem(item, view, subItems[i]);
             }
+
+            // Allows the user to add more items to a category
             item.findViewById(R.id.add_more_sub_items).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -69,6 +77,7 @@ public class budgetScreen extends AppCompatActivity {
                 }
             });
 
+            // Allows the user to remove items from a category
             item.findViewById(R.id.remove_item).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -88,6 +97,7 @@ public class budgetScreen extends AppCompatActivity {
         });
     }
 
+    // Allows the user to add titles
     private void showInsertDialog(final OnItemCreated positive) {
         final EditText text = new EditText(this);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -109,14 +119,12 @@ public class budgetScreen extends AppCompatActivity {
 
     public boolean onTouchEvent(MotionEvent touchEvent) {
         switch (touchEvent.getAction()) {
-            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_DOWN:// Gets points of where you first touch the screen
                 x1 = touchEvent.getX();
-                y1 = touchEvent.getY();
                 break;
-            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_UP:// Gets points of where you last the screen
                 x2 = touchEvent.getX();
-                y2 = touchEvent.getY();
-                if (x1 < x2) {
+                if (x1 < x2) { // Checks if you you have swiped back (right)
                     Intent i = new Intent(budgetScreen.this, HomeActivity.class);
                     startActivity(i);
                 }

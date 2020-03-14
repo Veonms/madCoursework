@@ -6,7 +6,7 @@
     tools:context="com.diegodobelo.expandinganimlib.budgetScreen">
 
     <com.diegodobelo.expandingview.ExpandingList
-        android:id="@+id/expanding_list_main"
+        android:id="@+id/expanding_list"
         android:layout_width="match_parent"
         android:layout_height="504dp" />
 </RelativeLayout>
