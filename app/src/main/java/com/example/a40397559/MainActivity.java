@@ -28,6 +28,6 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
 
-        }, splashTimeout);
+        }, splashTimeout); // Waits 3 seconds (3000ms)
     }
 }
